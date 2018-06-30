@@ -19,12 +19,12 @@ init: ## Init
 	@pipenv install
 	@echo End $@
 
-run: ## Sort
+sort: ## Sort
 	@echo Start $@
 	@pipenv run python todoistools/main.py sort
 	@echo End $@
 
-_random: ## Sort randomize (for test)
+random_sort: ## Sort randomize (for test)
 	@echo Start $@
 	@pipenv run python todoistools/main.py sort --randomize
 	@echo End $@
