@@ -9,7 +9,7 @@ from owlmixin.owlcollections import TList
 
 from todoistools.models import TodoistApiTask, PendulumDate
 
-TODOIST_API_URL = 'https://todoist.com/API/v7'
+TODOIST_API_URL = 'https://todoist.com/API/v8'
 
 
 def fetch_uncompleted_tasks(todoist_token: str, date: PendulumDate) -> TList[TodoistApiTask]:
@@ -21,8 +21,8 @@ def fetch_uncompleted_tasks(todoist_token: str, date: PendulumDate) -> TList[Tod
 
     return TodoistApiTask.from_dicts(items, restrict=False)\
         .reject(_.checked)\
-        .filter(lambda x: x.due_date_utc.map(
-                lambda y: y.in_tz('Asia/Tokyo').format('YYYY-MM-DD')).get() == date.format('YYYY-MM-DD'))
+        .filter(lambda x: x.due.map(
+                lambda y: y.date.in_tz('Asia/Tokyo').format('YYYY-MM-DD')).get() == date.format('YYYY-MM-DD'))
 
 
 def update_day_orders(todoist_token: str, ids: TList[str]) -> bool:

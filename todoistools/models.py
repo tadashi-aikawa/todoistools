@@ -25,6 +25,13 @@ class PendulumDate(DateTime, ValueTransformer):
         return self.isoformat()
 
 
+
+class Due(OwlMixin):
+    date: PendulumDate
+    is_recurring: bool
+    lang: str
+
+
 class TodoistApiTask(OwlMixin):
     id: int
     content: str
@@ -32,11 +39,7 @@ class TodoistApiTask(OwlMixin):
     project_id: int
     labels: TList[int]
     checked: int
-
-    due_date_utc: TOption[PendulumDate]
-    date_lang: TOption[str]
-    date_string: TOption[str]
-
+    due: TOption[Due]
     day_order: TOption[int]
 
 
