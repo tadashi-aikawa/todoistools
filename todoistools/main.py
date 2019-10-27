@@ -7,7 +7,7 @@ import random
 
 import fire
 from fn import _
-from owlmixin import TList
+from typing import List
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -16,8 +16,8 @@ from todoistools import api
 from todoistools.models import PendulumDate, TodoistApiTask, Config
 
 
-def to_times(task: TodoistApiTask):
-    return re.findall('\d+:\d+', task.content)
+def to_times(task: TodoistApiTask) -> List[str]:
+    return [''.join(x.split(':')).zfill(4) for x in re.findall('\d+:\d+', task.content)]
 
 
 def sort(config='config.yml', randomize=False):
