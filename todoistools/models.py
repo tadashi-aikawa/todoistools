@@ -8,7 +8,7 @@ from owlmixin.transformers import ValueTransformer
 
 class PendulumDate(DateTime, ValueTransformer):
     @classmethod
-    def from_value(cls, value: str) -> 'PendulumDate':
+    def from_value(cls, value: str) -> "PendulumDate":
         origin: DateTime = pendulum.parse(value, strict=False)
         return cls(
             year=origin.year,
@@ -18,12 +18,11 @@ class PendulumDate(DateTime, ValueTransformer):
             minute=origin.minute,
             second=origin.second,
             microsecond=origin.microsecond,
-            tzinfo=origin.tzinfo
+            tzinfo=origin.tzinfo,
         )
 
     def to_value(self, ignore_none: bool, force_value: bool) -> str:
         return self.isoformat()
-
 
 
 class Due(OwlMixin):
@@ -45,4 +44,4 @@ class TodoistApiTask(OwlMixin):
 
 class Config(OwlMixin):
     token: str
-
+    work_project_ids: TList[int] = []
