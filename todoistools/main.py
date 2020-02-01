@@ -22,7 +22,7 @@ def to_times(task: TodoistApiTask) -> List[str]:
     return [''.join(x.split(':')).zfill(4) for x in re.findall('\d+:\d+', task.content)]
 
 
-def sort(config='config.yml'):
+def sort(config='config.yml', dry=False):
     conf: Config = Config.from_yamlf(config)
 
     scheduled_tasks, free_tasks = api.fetch_uncompleted_tasks(conf.token, PendulumDate.today())\
@@ -33,10 +33,11 @@ def sort(config='config.yml'):
         .concat(free_tasks.filter(_.labels), first=True)\
         .concat(free_tasks.reject(_.labels), first=False)
 
-    if api.update_day_orders(conf.token, sorted_tasks.map(_.id)):
-        print('success')
+    if dry:
+        print(sorted_tasks.map(lambda x: x.content).to_yaml())
     else:
-        print('failure update')
+        is_success = api.update_day_orders(conf.token, sorted_tasks.map(_.id))
+        print('success' if is_success else 'failure update')
 
 
 def main():
