@@ -24,7 +24,7 @@ sort: ## Sort
 	@pipenv run python todoistools/main.py sort
 	@echo End $@
 
-random_sort: ## Sort randomize (for test)
+dry_sort: ## Show tasks sorted but not sort in actual
 	@echo Start $@
-	@pipenv run python todoistools/main.py sort --randomize
+	@pipenv run python todoistools/main.py sort --dry
 	@echo End $@
