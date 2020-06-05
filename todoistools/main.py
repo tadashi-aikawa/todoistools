@@ -33,8 +33,8 @@ def sort(config="config.yml", dry=False):
 
     sorted_tasks: TList[TodoistApiTask] = (
         scheduled_tasks.order_by(lambda x: to_times(x))
-        .concat(work_tasks, first=True)
-        .concat(not_work_tasks, first=False)
+        .concat(not_work_tasks, first=True)
+        .concat(work_tasks, first=False)
     )
 
     if dry:
