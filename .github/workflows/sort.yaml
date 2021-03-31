@@ -6,6 +6,9 @@ jobs:
   sort:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/set-timezone-action@v1.1
+        with:
+          timezoneLinux: "Asia/Tokyo"
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
@@ -15,4 +18,3 @@ jobs:
           python -m pip install --upgrade pip pipenv
           make init
           make sort
-
