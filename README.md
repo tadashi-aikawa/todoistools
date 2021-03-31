@@ -5,7 +5,7 @@ todoistools
 Prerequirements
 ---------------
 
-* Python3.7
+* Python3.8
 * Make
 
 
