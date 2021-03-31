@@ -2,7 +2,8 @@ name: "Sort"
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    # –ˆ“ú22‚ÉÀs
+    - cron: '0 13 * * *'
 
 jobs:
   sort:
