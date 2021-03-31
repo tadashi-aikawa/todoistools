@@ -25,11 +25,11 @@ def to_times(task: TodoistApiTask) -> List[str]:
 def sort(config="config.yml", dry=False):
     conf: Config = Config.from_yamlf(config)
 
-    scheduled_tasks, free_tasks = api.fetch_uncompleted_tasks(
+    free_tasks, scheduled_tasks = api.fetch_uncompleted_tasks(
         conf.token, PendulumDate.today()
-    ).partial(to_times)
+    ).partition(to_times)
 
-    work_tasks, not_work_tasks = free_tasks.partial(lambda x: x.project_id in conf.work_project_ids)
+    not_work_tasks, work_tasks = free_tasks.partition(lambda x: x.project_id in conf.work_project_ids)
 
     sorted_tasks: TList[TodoistApiTask] = (
         scheduled_tasks.order_by(lambda x: to_times(x))
