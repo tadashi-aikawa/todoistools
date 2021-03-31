@@ -1,0 +1,12 @@
+name: "Sort"
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "token: ${{ secrets.TODOIST_TOKEN }}"config.yml"
+      - run: |
+          make sort
+
