@@ -2,7 +2,7 @@ name: "Sort"
 
 on:
   schedule:
-    # –ˆ“ú22‚ÉÀs
+    # Every 22 hours
     - cron: '0 13 * * *'
 
 jobs:
