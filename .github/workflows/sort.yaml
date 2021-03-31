@@ -2,8 +2,8 @@ name: "Sort"
 
 on:
   schedule:
-    # Every 22 hours
-    - cron: '0 13 * * *'
+    # Every 3 hours
+    - cron: '0 18 * * *'
 
 jobs:
   sort:
