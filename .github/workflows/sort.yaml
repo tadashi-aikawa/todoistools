@@ -1,7 +1,9 @@
 name: "Sort"
 
+on: workflow_dispatch
+
 jobs:
-  commit:
+  sort:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
