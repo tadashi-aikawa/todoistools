@@ -7,8 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
       - run: |
-          echo "token: ${{ secrets.TODOIST_TOKEN }}" > config.yml"
-      - run: |
+          echo "token: ${{ secrets.TODOIST_TOKEN }}" > config.yml
+          python -m pip install --upgrade pip pipenv
+          make init
           make sort
 
