@@ -3,7 +3,7 @@ name: "Sort"
 on:
   schedule:
     # Every 3 hours
-    - cron: '0 18 * * *'
+    - cron: "0 18 * * *"
 
 jobs:
   sort:
@@ -19,5 +19,19 @@ jobs:
           make init
           make sort
         env:
-          TZ: 'Asia/Tokyo'
+          TZ: "Asia/Tokyo"
 
+      - uses: rjstone/discord-webhook-notify@v1
+        if: "! success()"
+        with:
+          description: "⚠ Sorting daily tasks failed!"
+          severity: error
+          avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - uses: rjstone/discord-webhook-notify@v1
+        if: "success()"
+        with:
+          description: "✅ Sorting daily tasks finished!"
+          severity: info
+          avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
