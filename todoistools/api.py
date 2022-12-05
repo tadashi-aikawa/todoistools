@@ -9,7 +9,7 @@ from owlmixin.owlcollections import TList
 
 from todoistools.models import TodoistApiTask, PendulumDate
 
-TODOIST_API_URL = 'https://todoist.com/API/v8'
+TODOIST_API_URL = 'https://todoist.com/API/v9'
 
 
 def fetch_uncompleted_tasks(todoist_token: str, date: PendulumDate) -> TList[TodoistApiTask]:
