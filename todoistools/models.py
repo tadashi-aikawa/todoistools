@@ -32,16 +32,16 @@ class Due(OwlMixin):
 
 
 class TodoistApiTask(OwlMixin):
-    id: int
+    id: str
     content: str
     priority: int
-    project_id: int
-    labels: TList[int]
-    checked: int
+    project_id: str
+    labels: TList[str]
+    checked: bool
     due: TOption[Due]
     day_order: TOption[int]
 
 
 class Config(OwlMixin):
     token: str
-    work_project_ids: TList[int] = []
+    work_project_ids: TList[str] = []
