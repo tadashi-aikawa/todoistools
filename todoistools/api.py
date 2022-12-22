@@ -14,10 +14,9 @@ TODOIST_API_URL = 'https://api.todoist.com/api/v9'
 
 def fetch_uncompleted_tasks(todoist_token: str, date: PendulumDate) -> TList[TodoistApiTask]:
     items = requests.get(f"{TODOIST_API_URL}/sync", params={
-        "token": todoist_token,
         "sync_token": "*",
         "resource_types": '["items"]'
-    }).json()['items']
+    }, headers={"Authorization": f"Bearer {todoist_token}"}).json()['items']
 
     return TodoistApiTask.from_dicts(items, restrict=False)\
         .reject(_.checked)\
@@ -35,8 +34,7 @@ def update_day_orders(todoist_token: str, ids: TList[str]) -> bool:
     }]
 
     r = requests.get(f"{TODOIST_API_URL}/sync", params={
-        "token": todoist_token,
         "commands": json.dumps(commands)
-    })
+    }, headers={"Authorization": f"Bearer {todoist_token}"})
 
     return r.ok
